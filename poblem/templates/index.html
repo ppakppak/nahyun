@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>분리수거 시뮬레이션</title>
+    <script src="https://www.vpython.org/contents/vpython.js"></script>
+</head>
+<body>
+    <script>
+        // 환경 설정
+        scene.title = "분리수거 시뮬레이션";
+        scene.background = new vector(1, 1, 1);
+
+        // 분류 박스 생성
+        var boxes = {
+            '종이': box({ pos: vector(-3, 0, 0), size: vector(1, 1, 1), color: vector(0.8, 0.5, 0.3) }),
+            '플라스틱': box({ pos: vector(-1.5, 0, 0), size: vector(1, 1, 1), color: vector(0.68, 0.85, 0.85) }),
+            '비닐': box({ pos: vector(0, 0, 0), size: vector(1, 1, 1), color: vector(0.5, 1, 0.5) }),
+            '캔': box({ pos: vector(1.5, 0, 0), size: vector(1, 1, 1), color: vector(1, 0.5, 0.5) })
+        };
+
+        // 쓰레기 아이템 생성
+        var items = [
+            { name: '신문지', type: '종이' },
+            { name: '페트병', type: '플라스틱' },
+            { name: '비닐봉지', type: '비닐' },
+            { name: '캔', type: '캔' },
+            { name: '종이컵', type: '종이' },
+            { name: '플라스틱 용기', type: '플라스틱' },
+            { name: '알루미늄 캔', type: '캔' },
+            { name: '과자 봉지', type: '비닐' }
+        ];
+
+        // 점수와 시행 횟수
+        var score = 0;
+        var attempts = 0;
+
+        // 게임 시작
+        function createTrash() {
+            var item = items[Math.floor(Math.random() * items.length)];
+            var trash = sphere({ pos: vector(3, 0, 0), radius: 0.2, color: vector(1, 1, 1) });
+            trash.name = item.name; // 물건 이름
+            trash.type = item.type; // 물건 종류
+            return trash;
+        }
+
+        var trash = createTrash();
+
+        // 사용자가 클릭할 때 처리
+        function mouseClick(evt) {
+            var mousePos = scene.mouse.pos.x;
+            var userType;
+
+            if (mousePos < -2) { // 종이 박스
+                userType = '종이';
+            } else if (mousePos < 0) { // 플라스틱 박스
+                userType = '플라스틱';
+            } else if (mousePos < 1.5) { // 비닐 박스
+                userType = '비닐';
+            } else if (mousePos < 3) { // 캔 박스
+                userType = '캔';
+            } else {
+                return; // 클릭이 유효하지 않음
+            }
+
+            attempts++;
+            if (userType === trash.type) {
+                score++;
+                console.log(`정확히 분리수거되었습니다! '${trash.name}'가 ${trash.type}로 분리되었습니다.`);
+            } else {
+                console.log(`잘못된 분리수거! '${trash.name}'는 ${trash.type}입니다.`);
+            }
+
+            trash.remove(); // 쓰레기 제거
+            trash = createTrash(); // 새로운 쓰레기 생성
+
+            // 점수와 시행 횟수 출력
+            if (attempts === 15) {
+                if (score >= 10) {
+                    console.log('당신은 분리수거 고수! 😎 앞으로도 환경을 위해 열심히 분리수거 해주세요 😊');
+                } else {
+                    console.log('당신은 분리수거 허수ㅡㅡ 올바른 분리수거 방법을 배워보세요 😎');
+                }
+                // 리셋 또는 종료 로직 추가 가능
+            }
+        }
+
+        // 마우스 클릭 이벤트 등록
+        scene.bind('click', mouseClick);
+
+        // 무한 루프
+        function animate() {
+            rate(60);
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>

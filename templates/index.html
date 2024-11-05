@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>분리수거 시뮬레이션</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="game-container">
+        <h1>분리수거 시뮬레이션</h1>
+        <div class="score-display">점수: <span id="score">0</span></div>
+        <div class="trash-item" id="currentItem"></div>
+        
+        <div class="bins-container">
+            <div class="bin" data-type="종이">
+                <div class="bin-box paper"></div>
+                <div class="bin-label">종이</div>
+            </div>
+            <div class="bin" data-type="플라스틱">
+                <div class="bin-box plastic"></div>
+                <div class="bin-label">플라스틱</div>
+            </div>
+            <div class="bin" data-type="비닐">
+                <div class="bin-box vinyl"></div>
+                <div class="bin-label">비닐</div>
+            </div>
+            <div class="bin" data-type="캔">
+                <div class="bin-box can"></div>
+                <div class="bin-label">캔</div>
+            </div>
+        </div>
+        
+        <div class="message" id="message"></div>
+    </div>
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+</body>
+</html> 

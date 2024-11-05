@@ -1,0 +1,118 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.game-container {
+    text-align: center;
+    max-width: 800px;
+}
+
+.score-display {
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+.bins-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 40px 0;
+}
+
+.bin {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.bin:hover {
+    transform: scale(1.05);
+}
+
+.bin-box {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.paper { background-color: #d9bc73; }
+.plastic { background-color: #aed9d9; }
+.vinyl { background-color: #d9f0d9; }
+.can { background-color: #ffadad; }
+
+.bin-label {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.trash-item {
+    font-size: 24px;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.message {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+}
+
+/* 모바일 대응을 위한 미디어 쿼리 추가 */
+@media screen and (max-width: 768px) {
+    .game-container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .bins-container {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .bin {
+        flex: 1 1 40%;
+        min-width: 120px;
+    }
+
+    .bin-box {
+        width: 80px;
+        height: 80px;
+    }
+
+    .trash-item {
+        font-size: 20px;
+        margin: 10px 0;
+        padding: 15px;
+    }
+
+    .score-display {
+        font-size: 20px;
+    }
+
+    .message {
+        font-size: 16px;
+    }
+}
+
+/* 작은 모바일 화면 대응 */
+@media screen and (max-width: 480px) {
+    .bin-box {
+        width: 60px;
+        height: 60px;
+    }
+
+    .bin-label {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+} 
